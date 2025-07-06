@@ -1,0 +1,8 @@
+{
+  "maxDepth": 3,
+  "maxWorkers": 15,
+  "timeoutSec": 15,
+  "respectRobots": true,
+  "userAgent": "EchoSpider/1.0",
+  "outputFormat": "console"
+}
