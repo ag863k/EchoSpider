@@ -8,13 +8,14 @@ A professional concurrent web crawler built with Go that showcases advanced conc
 
 ## 🚀 Features
 
-- **High-Performance Concurrency**: Leverages Go's goroutines and channels for efficient concurrent crawling
-- **Context-Aware Operations**: Proper timeout and cancellation support using Go's context package
-- **Intelligent Link Discovery**: Extracts and follows internal links with smart URL resolution
-- **Robots.txt Compliance**: Optional respect for robots.txt rules with intelligent caching
-- **Professional CLI**: Feature-rich command-line interface built with Cobra
-- **Robust Error Handling**: Comprehensive error reporting and graceful failure handling
-- **Thread-Safe Operations**: Concurrent-safe visited URL tracking and state management
+- **High-Performance Concurrency**: Leverages Go's goroutines and channels with lock-free data structures
+- **Context-Aware Operations**: Proper timeout and cancellation support with retry logic
+- **Intelligent Link Discovery**: Extracts links, images, metadata with smart URL resolution
+- **Robots.txt Compliance**: Advanced robots.txt parsing with intelligent caching
+- **Professional CLI**: Feature-rich interface with emoji output and detailed statistics
+- **Robust Error Handling**: Comprehensive error reporting with automatic retry for transient failures
+- **Thread-Safe Operations**: Lock-free concurrent operations using sync.Map and atomic counters
+- **Performance Monitoring**: Real-time statistics tracking with bandwidth and timing metrics
 
 ## 🛠️ Installation
 
@@ -61,11 +62,12 @@ go build -o echospider
 
 | Flag | Short | Default | Description |
 |------|-------|---------|-------------|
-| `--depth` | `-d` | `2` | Maximum crawl depth |
-| `--workers` | `-w` | `10` | Number of concurrent workers |
-| `--timeout` | `-t` | `10s` | Request timeout duration |
+| `--depth` | `-d` | `3` | Maximum crawl depth |
+| `--workers` | `-w` | `20` | Number of concurrent workers |
+| `--timeout` | `-t` | `30s` | Request timeout duration |
 | `--respect-robots` | `-r` | `false` | Respect robots.txt rules |
 | `--verbose` | `-v` | `false` | Enable verbose output |
+| `--show-images` | `-i` | `false` | Show discovered images |
 
 ## 🏗️ Architecture
 
@@ -109,10 +111,14 @@ go test -v ./...
 
 EchoSpider is designed for high performance:
 
-- **Concurrent Processing**: Configurable worker pools (default: 10 workers)
-- **Efficient Memory Usage**: Streaming results, minimal memory footprint
-- **Smart Caching**: Robots.txt caching, visited URL deduplication
-- **Timeout Management**: Prevents resource leaks and hanging connections
+- **Concurrent Processing**: Configurable worker pools (default: 20 workers)
+- **Efficient Memory Usage**: Streaming results, atomic operations, sync.Map for visited URLs
+- **Smart Caching**: Robots.txt caching, URL deduplication with lock-free operations
+- **Timeout Management**: Per-request timeouts, context-based cancellation
+- **Retry Logic**: Automatic retry for transient network errors
+- **Rate Limiting**: Built-in rate limiting to prevent server overload
+- **Memory Optimization**: Lock-free concurrent data structures
+- **Connection Pooling**: HTTP/2 support with optimized transport settings
 
 ## 🔧 Configuration
 
