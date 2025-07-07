@@ -2,42 +2,22 @@
 echospider
 echospider.exe
 *.exe
-*.dll
-*.so
-*.dylib
 
 # Build directories
 build/
 dist/
-bin/
 
 # Test artifacts
 *.test
 *.out
-coverage.out
-
-# Go workspace file
-go.work
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
 # OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 
 # Logs
 *.log
-*.tmp
-
-# Local config
-config.local.json

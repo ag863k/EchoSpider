@@ -25,12 +25,8 @@ A professional concurrent web crawler built with Go that showcases advanced conc
 ```bash
 git clone https://github.com/yourusername/echospider.git
 cd echospider
+go mod tidy
 go build -o echospider
-```
-
-### Install via Go
-```bash
-go install github.com/yourusername/echospider@latest
 ```
 
 ## 📖 Usage
@@ -57,7 +53,8 @@ go install github.com/yourusername/echospider@latest
     --depth 5 \
     --workers 50 \
     --timeout 15s \
-    --respect-robots
+    --respect-robots \
+    --verbose
 ```
 
 ### Command Line Options
@@ -68,6 +65,7 @@ go install github.com/yourusername/echospider@latest
 | `--workers` | `-w` | `10` | Number of concurrent workers |
 | `--timeout` | `-t` | `10s` | Request timeout duration |
 | `--respect-robots` | `-r` | `false` | Respect robots.txt rules |
+| `--verbose` | `-v` | `false` | Enable verbose output |
 
 ## 🏗️ Architecture
 
@@ -130,9 +128,39 @@ EchoSpider is designed for high performance:
 }
 ```
 
-## 🤝 Contributing
+### Programmatic Usage
+```go
+package main
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+import (
+    "context"
+    "fmt"
+    "time"
+)
+
+func main() {
+    crawler := NewCrawler(2, 10, 10*time.Second, false)
+    ctx := context.Background()
+    
+    results := crawler.Crawl(ctx, "https://example.com")
+    for result := range results {
+        if result.Error != nil {
+            fmt.Printf("Error: %v\n", result.Error)
+            continue
+        }
+        fmt.Printf("Crawled: %s\n", result.URL)
+    }
+}
+```
+
+## 🔒 Best Practices
+
+1. **Set appropriate timeouts** to prevent hanging
+2. **Use context cancellation** for graceful shutdown
+3. **Monitor memory usage** for large crawls
+4. **Respect robots.txt** for ethical crawling
+5. **Implement rate limiting** for production use
+6. **Handle errors gracefully** in result processing
 
 ## 📄 License
 
