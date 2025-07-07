@@ -119,10 +119,10 @@ EchoSpider is designed for high performance:
 ### Configuration File (config.json)
 ```json
 {
-  "maxDepth": 3,
-  "maxWorkers": 15,
-  "timeoutSec": 15,
-  "respectRobots": true,
+  "maxDepth": 2,
+  "maxWorkers": 10,
+  "timeoutSec": 10,
+  "respectRobots": false,
   "userAgent": "EchoSpider/1.0",
   "outputFormat": "console"
 }
