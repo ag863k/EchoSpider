@@ -21,3 +21,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Allow pkg directory
+!pkg/
