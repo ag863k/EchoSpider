@@ -2,25 +2,51 @@
 echospider
 echospider.exe
 *.exe
+*.dll
+*.so
+*.dylib
 
 # Build directories
 build/
 dist/
 
-# Test artifacts
-*.test
-*.out
+# Environment variables and secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
+# Dependencies
+node_modules/
+vendor/
 
-# Allow pkg directory
-!pkg/
+# Runtime
+*.pid
+*.tmp
+*.cache
+
+# Test files
+*.test
+*.out
+
+# Go workspace
+go.work
